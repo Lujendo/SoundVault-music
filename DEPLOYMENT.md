@@ -24,7 +24,7 @@ This guide covers two deployment methods for the SoundVault music publishing man
    - Database name
 
 ### Step 2: Repository Setup
-1. Push code to GitHub/GitLab
+1. Push code to GitHub/GitLab repository: **SoundVault-music**
 2. Connect repository to Sevalla
 3. Set deployment branch (main/master)
 

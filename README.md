@@ -23,7 +23,7 @@ docker-compose up -d mariadb phpmyadmin
 # Method 1: Docker Deployment
 ./deploy-sevalla.sh docker
 
-# Method 2: Git Deployment
+# Method 2: Git Deployment (Repository: SoundVault-music)
 ./deploy-sevalla.sh git
 ```
 
