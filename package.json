@@ -6,7 +6,7 @@
   "description": "SoundVault Music Publishing Management System",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/SoundVault-music.git"
+    "url": "https://github.com/Lujendo/SoundVault-music.git"
   },
   "scripts": {
     "dev": "vite",

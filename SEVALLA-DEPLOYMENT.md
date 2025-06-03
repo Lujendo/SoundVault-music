@@ -10,8 +10,8 @@ This guide provides step-by-step instructions for deploying the SoundVault music
 
 ### Step 1: Push to GitHub/GitLab
 ```bash
-# Set your GitHub username
-git remote set-url origin https://github.com/YOUR_USERNAME/SoundVault-music.git
+# Repository URL (already configured)
+# https://github.com/Lujendo/SoundVault-music.git
 
 # Push to repository
 git push -u origin main
@@ -22,7 +22,7 @@ git push -u origin main
 1. **Login to Sevalla** control panel
 2. **Create New Application**
    - Choose "Git Repository" deployment
-   - Repository URL: `https://github.com/YOUR_USERNAME/SoundVault-music.git`
+   - Repository URL: `https://github.com/Lujendo/SoundVault-music.git`
    - Branch: `main`
 
 3. **Configure Build Settings**
