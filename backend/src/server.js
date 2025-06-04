@@ -5,6 +5,8 @@ import compression from 'compression';
 import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // Import routes
 import publishersRoutes from './routes/publishers.js';
@@ -23,6 +25,9 @@ import { notFound } from './middleware/notFound.js';
 
 // Load environment variables
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -58,8 +63,8 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Root endpoint
-app.get('/', (req, res) => {
+// API info endpoint (only for API requests)
+app.get('/api', (req, res) => {
   res.status(200).json({
     message: 'SoundVault Music Publishing API',
     version: '1.0.0',
@@ -84,6 +89,24 @@ app.use('/api/recordings', recordingsRoutes);
 app.use('/api/releases', releasesRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/royalties', royaltiesRoutes);
+
+// Serve static files from React build (production)
+if (process.env.NODE_ENV === 'production') {
+  const frontendDistPath = path.join(__dirname, '../../dist');
+
+  // Serve static files
+  app.use(express.static(frontendDistPath));
+
+  // Handle React Router (catch all handler: send back React's index.html file)
+  app.get('*', (req, res) => {
+    // Don't serve index.html for API routes
+    if (req.path.startsWith('/api/') || req.path.startsWith('/health')) {
+      return res.status(404).json({ error: 'API endpoint not found' });
+    }
+
+    res.sendFile(path.join(frontendDistPath, 'index.html'));
+  });
+}
 
 // Error handling middleware
 app.use(notFound);

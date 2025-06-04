@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "cd backend && npm install",
+    "build": "npm install && vite build && cd backend && npm install",
     "build:prod": "NODE_ENV=production vite build",
     "lint": "eslint .",
     "preview": "vite preview",
