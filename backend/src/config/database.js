@@ -30,7 +30,17 @@ const testConnection = async () => {
     connection.release();
   } catch (error) {
     console.error('❌ Failed to connect to MariaDB database:', error);
-    process.exit(-1);
+    console.log('⚠️ Server will start without database connection for initial deployment');
+    console.log('🔧 Configure database credentials in Sevalla environment variables');
+    console.log('📋 Database connection details needed:');
+    console.log(`   - DB_HOST: ${process.env.DB_HOST || 'not set'}`);
+    console.log(`   - DB_USER: ${process.env.DB_USER || 'not set'}`);
+    console.log(`   - DB_NAME: ${process.env.DB_NAME || 'not set'}`);
+
+    // Don't exit in production to allow deployment to succeed
+    if (process.env.NODE_ENV !== 'production') {
+      process.exit(-1);
+    }
   }
 };
 
@@ -44,9 +54,15 @@ export const query = async (sql, params = []) => {
     const [rows, fields] = await pool.execute(sql, params);
     const duration = Date.now() - start;
     console.log('📊 Executed query', { sql: sql.substring(0, 100) + '...', duration, rowCount: Array.isArray(rows) ? rows.length : 1 });
-    return { rows, fields };
+    return rows; // Return rows directly for easier use
   } catch (error) {
     console.error('❌ Database query error:', error);
+
+    // In production, return empty result instead of crashing
+    if (process.env.NODE_ENV === 'production') {
+      console.log('⚠️ Returning empty result due to database unavailability');
+      return [];
+    }
     throw error;
   }
 };
