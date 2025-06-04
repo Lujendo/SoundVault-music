@@ -6,19 +6,29 @@ Since you're using Sevalla's Connected Applications feature, the database setup 
 
 ---
 
-## 🚀 Step 1: Set Up Connected Application in Sevalla
+## 🚀 Step 1: Configure Sevalla Deployment
 
 ### In Sevalla Control Panel:
 
-1. **Go to your SoundVault application**
-2. **Navigate to "Connected Applications" or "Add-ons"**
-3. **Add MariaDB/MySQL Database**
+1. **Create New Application**
+   - Repository: `https://github.com/Lujendo/SoundVault-music.git`
+   - Branch: `main`
+
+2. **Configure Build Settings**
+   - **Build Command**: `npm install`
+   - **Start Command**: `npm start` (runs backend API)
+   - **Node.js Version**: `18.x` or higher
+   - **Port**: Let Sevalla auto-assign (don't specify)
+
+3. **Add MariaDB/MySQL Database (Connected Application)**
    - Choose MariaDB or MySQL
    - Database name: `soundvault` (or let Sevalla auto-generate)
    - Sevalla will automatically:
      - Create the database
      - Generate credentials
      - Inject environment variables into your app
+
+**⚠️ Important:** The root `npm start` command now runs the backend API server, not the frontend.
 
 ---
 

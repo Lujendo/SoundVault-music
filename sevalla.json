@@ -1,0 +1,32 @@
+{
+  "name": "soundvault-music",
+  "version": "1.0.0",
+  "description": "SoundVault Music Publishing Management System - Backend API",
+  "main": "backend/src/server.js",
+  "scripts": {
+    "start": "cd backend && npm install && npm start",
+    "build": "cd backend && npm install",
+    "dev": "cd backend && npm run dev",
+    "migrate": "cd backend && npm run migrate",
+    "seed": "cd backend && npm run seed",
+    "health": "curl -f http://localhost:$PORT/health || exit 1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lujendo/SoundVault-music.git"
+  },
+  "keywords": [
+    "music",
+    "publishing",
+    "api",
+    "nodejs",
+    "express",
+    "mariadb"
+  ],
+  "author": "Lujendo",
+  "license": "MIT"
+}
