@@ -43,6 +43,8 @@ docker-compose up -d mariadb phpmyadmin
 - **Database**: MariaDB with phpMyAdmin
 - **Deployment**: Docker, Sevalla hosting
 
-## 📖 Deployment Guide
+## 📖 Deployment Guides
 
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
+- **[SEVALLA-CONNECTED-APPS.md](./SEVALLA-CONNECTED-APPS.md)** - Sevalla Connected Applications setup (Recommended)
+- **[SEVALLA-DEPLOYMENT.md](./SEVALLA-DEPLOYMENT.md)** - General Sevalla deployment guide
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Universal deployment instructions

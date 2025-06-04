@@ -25,7 +25,7 @@ import { notFound } from './middleware/notFound.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 
 // Rate limiting
 const limiter = rateLimit({
@@ -52,7 +52,25 @@ app.get('/health', (req, res) => {
     status: 'OK',
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
-    environment: process.env.NODE_ENV || 'development'
+    environment: process.env.NODE_ENV || 'development',
+    port: PORT,
+    message: 'SoundVault API is running'
+  });
+});
+
+// Root endpoint
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'SoundVault Music Publishing API',
+    version: '1.0.0',
+    status: 'running',
+    port: PORT,
+    endpoints: {
+      health: '/health',
+      api: '/api',
+      artists: '/api/artists',
+      publishers: '/api/publishers'
+    }
   });
 });
 
@@ -72,10 +90,12 @@ app.use(notFound);
 app.use(errorHandler);
 
 // Start server
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 SoundVault API Server running on port ${PORT}`);
   console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🌐 CORS enabled for: ${process.env.FRONTEND_URL || process.env.CORS_ORIGIN || 'http://localhost:5173'}`);
+  console.log(`🔧 PORT environment variable: ${process.env.PORT ? 'SET by Sevalla' : 'NOT SET (using fallback)'}`);
+  console.log(`📡 Server listening on 0.0.0.0:${PORT}`);
 });
 
 export default app;

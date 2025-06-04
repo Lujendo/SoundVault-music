@@ -3,13 +3,13 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Database configuration
+// Database configuration - Support multiple environment variable formats
 const dbConfig = {
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || 'password',
-  database: process.env.DB_NAME || 'soundvault',
-  port: process.env.DB_PORT || 3306,
+  host: process.env.DATABASE_HOST || process.env.DB_HOST || process.env.MYSQL_HOST || 'localhost',
+  user: process.env.DATABASE_USER || process.env.DB_USER || process.env.MYSQL_USER || 'root',
+  password: process.env.DATABASE_PASSWORD || process.env.DB_PASSWORD || process.env.MYSQL_PASSWORD || 'password',
+  database: process.env.DATABASE_NAME || process.env.DB_NAME || process.env.MYSQL_DATABASE || 'soundvault',
+  port: process.env.DATABASE_PORT || process.env.DB_PORT || process.env.MYSQL_PORT || 3306,
   waitForConnections: true,
   connectionLimit: 20,
   queueLimit: 0,
@@ -31,11 +31,12 @@ const testConnection = async () => {
   } catch (error) {
     console.error('❌ Failed to connect to MariaDB database:', error);
     console.log('⚠️ Server will start without database connection for initial deployment');
-    console.log('🔧 Configure database credentials in Sevalla environment variables');
-    console.log('📋 Database connection details needed:');
-    console.log(`   - DB_HOST: ${process.env.DB_HOST || 'not set'}`);
-    console.log(`   - DB_USER: ${process.env.DB_USER || 'not set'}`);
-    console.log(`   - DB_NAME: ${process.env.DB_NAME || 'not set'}`);
+    console.log('🔧 Configure database credentials in Sevalla Connected Applications');
+    console.log('📋 Database connection details detected:');
+    console.log(`   - Host: ${dbConfig.host} (from ${process.env.DATABASE_HOST ? 'DATABASE_HOST' : process.env.DB_HOST ? 'DB_HOST' : process.env.MYSQL_HOST ? 'MYSQL_HOST' : 'default'})`);
+    console.log(`   - User: ${dbConfig.user} (from ${process.env.DATABASE_USER ? 'DATABASE_USER' : process.env.DB_USER ? 'DB_USER' : process.env.MYSQL_USER ? 'MYSQL_USER' : 'default'})`);
+    console.log(`   - Database: ${dbConfig.database} (from ${process.env.DATABASE_NAME ? 'DATABASE_NAME' : process.env.DB_NAME ? 'DB_NAME' : process.env.MYSQL_DATABASE ? 'MYSQL_DATABASE' : 'default'})`);
+    console.log(`   - Port: ${dbConfig.port}`);
 
     // Don't exit in production to allow deployment to succeed
     if (process.env.NODE_ENV !== 'production') {
