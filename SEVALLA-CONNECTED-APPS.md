@@ -45,12 +45,17 @@ MYSQL_PORT=3306
 ### Additional Environment Variables You Need to Set:
 ```env
 NODE_ENV=production
-JWT_SECRET=your-super-secure-jwt-secret-change-this
+JWT_SECRET=1d32346b456f0834d25eee3be9cb867c15e0aa41e2df8cf01b7482205134328fc3bee56a7cea5c3401f3f415909a65845ea2cfd791bea7aabd055b612d843484
 CORS_ORIGIN=https://your-frontend-domain.sevalla.com
 FRONTEND_URL=https://your-frontend-domain.sevalla.com
 PORT=8080
 TRUST_PROXY=true
 ```
+
+**🔐 JWT Secret Generation:**
+- Use the JWT_SECRET above, or generate a new one with: `node generate-jwt-secret.js`
+- Keep this secret secure and never share it
+- This is used for signing authentication tokens
 
 ---
 
