@@ -25,7 +25,7 @@ In your Sevalla Control Panel:
 - Start Command: `cd backend && npm install && npm start`
 
 **New (Correct) Settings:**
-- **Build Command**: `npm install`
+- **Build Command**: `npm run build`
 - **Start Command**: `npm start`
 - **Node.js Version**: `18.x`
 - **Port**: Leave empty (let Sevalla auto-assign)
